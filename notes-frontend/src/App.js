@@ -79,11 +79,17 @@ const App = () => {
 
   const addNote = (noteObject) => {
     noteFormRef.current.toggleVisibility()
+    if (!validateNote(noteObject.content)) { alert('Invalid note length, minimum length of 5'); return }
     noteService
       .create(noteObject)
       .then(returnedNote => {
         setNotes(notes.concat(returnedNote))
       })
+  }
+
+  const validateNote = (noteContent) => {
+    if (noteContent.length < 5) { return false }
+    else { return true }
   }
 
   const noteForm = () =>
@@ -110,7 +116,7 @@ const App = () => {
           />
         </Togglable> :
         <div>
-          <p>{user.name} logged-in <button onClick={() => {window.localStorage.removeItem('loggedBlogappUser'); setUser(null)}}>logout</button></p>
+          <p>{user.name} logged-in <button onClick={() => { window.localStorage.removeItem('loggedBlogappUser'); setUser(null) }}>logout</button></p>
           {noteForm()}
         </div>
       }
@@ -129,7 +135,7 @@ const App = () => {
           />
         )}
       </ul>
-      <Footer/>
+      <Footer />
     </div>
   )
 }
