@@ -31,6 +31,8 @@ const App = () => {
 
     const personToAdd = person[0]
     const updatedPerson = { ...personToAdd, number: newNumber }
+    if (!validateNumber(newNumber))
+    {alert("Invalid Number Format"); return; }
 
     if (person.length !== 0) {
       if (window.confirm(`${personToAdd.name} is already added to the phonebook, replace the old number with a new one ?`)) {
@@ -121,6 +123,16 @@ const App = () => {
     const regex = new RegExp( newFilter, 'i' );
     const filteredPersons = () => allPersons.filter(person => person.name.match(regex))
     setPersons(filteredPersons)
+  }
+
+  const validateNumber = (phoneNumber) => {
+    var pattern = /^\d{3}-\d{3}-\d{4}$/;
+
+    if (pattern.test(phoneNumber)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   return (
