@@ -15,10 +15,13 @@ const App = () => {
   const [user, setUser] = useState(null)
   const blogFormRef = useRef()
 
-  useEffect(async () => {
-    const blogs = await blogService.getAll()
-    setBlogs( blogs )
-    setErrorMessage(null)
+  useEffect( () => {
+    blogService
+      .getAll()
+      .then(incomingBlogs => {
+        setBlogs( incomingBlogs )
+        setErrorMessage(null)
+      })
   }, [])
 
   useEffect(() => {
