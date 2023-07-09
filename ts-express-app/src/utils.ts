@@ -54,7 +54,7 @@ const isWeather = (param: string): param is Weather => {
 };
 
 const parseVisibility = (visibility: unknown): Visibility => {
-  if (visibility || !isString(visibility) || !isVisibility(visibility)) {
+  if (!visibility || !isString(visibility) || !isVisibility(visibility)) {
     throw new Error('Incorrect or missing visibility: ' + visibility);
   }
   return visibility;
